@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zos · C 语言学习平台</title>
+  <title>Zos · 学习平台</title>
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300ccff'/%3E%3Cstop offset='1' stop-color='%23999cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M10 10h12L10 22h12' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <style>
@@ -126,7 +126,7 @@
     }
 
     body {
-      font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", "Segoe UI", sans-serif;
       background:
         radial-gradient(1200px 600px at 85% -5%, rgba(var(--primary-rgb), 0.16), transparent 60%),
         radial-gradient(1000px 700px at -10% 30%, rgba(var(--primary-2-rgb), 0.12), transparent 55%),
@@ -4381,7 +4381,7 @@
         radial-gradient(900px 500px at 85% 110%, rgba(var(--primary-2-rgb), 0.16), transparent 60%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
       color: var(--text);
-      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", "Segoe UI", sans-serif;
       overflow-x: hidden;
       overflow-y: auto;
     }
@@ -4792,6 +4792,8 @@
       flex-shrink: 0;
       margin: 10px 14px 0;
       border-radius: 18px;
+      background: var(--glass-inner);
+      border: 1px solid var(--glass-border);
     }
 
     .cat-nav::-webkit-scrollbar {
@@ -4806,13 +4808,15 @@
       background: var(--glass-inner);
       border: 1px solid var(--glass-border);
       color: var(--text-2);
-      transition: all 0.25s ease;
+      transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
       position: relative;
       overflow: hidden;
     }
 
     .cat-pill:hover {
       color: var(--primary);
+      background: rgba(var(--primary-rgb), 0.08);
+      transform: translateY(-1px);
     }
 
     .cat-pill.active {
@@ -4848,8 +4852,9 @@
       position: relative;
       min-height: 200px;
       cursor: pointer;
-      animation: fadeUp 0.5s ease both;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeUp 0.3s ease both;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      will-change: transform;
       display: flex;
       align-items: flex-end;
     }
@@ -4865,7 +4870,7 @@
       background-size: cover;
       background-position: center;
       filter: blur(0);
-      transition: transform 6s ease;
+      transition: transform 0.6s ease;
       z-index: 0;
       overflow: hidden;
     }
@@ -4993,7 +4998,7 @@
       content: "";
       flex: 1;
       height: 1px;
-      background: var(--glass-border);
+      background: linear-gradient(90deg, var(--glass-border), transparent);
     }
 
     /* 摘要卡片流 */
@@ -5010,14 +5015,14 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      animation: fadeUp 0.45s ease both;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeUp 0.3s ease both;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      will-change: transform;
     }
 
     .news-item:hover {
-      transform: scale(1.04);
+      transform: translateY(-3px) scale(1.02);
       box-shadow: var(--shadow-hover);
-      animation: cardHoverPop 0.4s ease both;
     }
 
     .news-item .ni-img {
@@ -5110,6 +5115,12 @@
       border-color: rgba(255, 255, 255, 0.10);
     }
 
+    /* hover 缩放时降低 backdrop-filter 模糊成本，避免光标移过卡顿 */
+    .news-item:hover .ni-body {
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
     .news-item .ni-meta {
       display: flex;
       align-items: center;
@@ -5133,7 +5144,14 @@
     .news-empty {
       text-align: center;
       color: var(--text-3);
-      padding: 60px 20px;
+      padding: 48px 20px;
+      margin: 24px auto;
+      max-width: 520px;
+      border-radius: 18px;
+      background: var(--glass-inner);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     /* 详情弹层 */
@@ -5243,7 +5261,7 @@
       height: auto;
       min-height: 100vh;
       overflow: visible;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", "Segoe UI", sans-serif;
       color: var(--text-primary);
       background: var(--bg-primary);
       user-select: none;
@@ -5256,10 +5274,10 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse at 20% 10%, rgba(0, 204, 255, 0.18) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 90%, rgba(193, 145, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(255, 251, 139, 0.04) 0%, transparent 60%),
-        linear-gradient(180deg, #0a0f0c 0%, #131815 40%, #1a1f1c 100%);
+        radial-gradient(ellipse 820px 420px at 74% 14%, rgba(0, 204, 255, 0.07) 0%, transparent 62%),
+        radial-gradient(ellipse 760px 430px at 12% 72%, rgba(193, 145, 255, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 520px 320px at 50% 97%, rgba(90, 200, 250, 0.05) 0%, transparent 65%),
+        linear-gradient(180deg, #020406 0%, #05080c 52%, #080d11 100%);
       z-index: -1;
       pointer-events: none;
     }
@@ -5272,6 +5290,107 @@
       opacity: 0.3;
       z-index: -1;
       pointer-events: none;
+    }
+
+    /* ============================================
+       登录视图顶部 Dock（透明悬浮，仅登录视图显示）
+       ============================================ */
+    .landing-dock {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 36px;
+      pointer-events: none;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", "Segoe UI", sans-serif;
+    }
+    .landing-dock > * {
+      pointer-events: auto;
+    }
+    .dock-logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      line-height: 1;
+      background: linear-gradient(120deg, #5ac8fa 0%, #00ccff 32%, #c191ff 68%, #ff6b9d 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      text-shadow: 0 0 26px rgba(0, 204, 255, 0.22);
+    }
+    .dock-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dock-pill {
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 8px 17px;
+      border-radius: 999px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s var(--bounce), box-shadow 0.3s ease;
+    }
+    .dock-pill:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(var(--primary-rgb), 0.65);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0, 204, 255, 0.12);
+    }
+    .dock-lang {
+      display: flex;
+      gap: 2px;
+      padding: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .dock-lang button {
+      appearance: none;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 6px 15px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .dock-lang button.active {
+      color: #fff;
+      background: rgba(var(--primary-rgb), 0.26);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+    @media (max-width: 560px) {
+      .landing-dock {
+        padding: 12px 18px;
+      }
+      .dock-logo {
+        font-size: 21px;
+      }
+      .dock-pill {
+        padding: 7px 13px;
+        font-size: 12px;
+      }
+      .dock-lang button {
+        padding: 5px 11px;
+        font-size: 12px;
+      }
     }
 
     /* ============================================
@@ -5289,14 +5408,15 @@
     }
 
     #particleCanvas {
-      position: absolute;
-      top: -14.35%;
-      left: -14.35%;
-      width: 128.7%;
-      height: 128.7%;
+      position: fixed;
+      top: -14.35vh;
+      left: -14.35vw;
+      width: 128.7vw;
+      height: 128.7vh;
       z-index: 0;
       pointer-events: none;
-      /* 深邃星空渐变底：中心微亮、四周沉入黑暗，与粒子层次分明 */
+      /* 深邃星空渐变底：中心微亮、四周沉入黑暗，与粒子层次分明；fixed 超视口铺满（128.7vw/128.7vh 居中，中心与视口中心对齐），
+         为每帧 perspective rotateX/rotateY（±4° 跟随鼠标）预留旋转余量，滚动到介绍页任意位置星空始终完整铺满视口、无纯色边界 */
       background:
         radial-gradient(ellipse at 50% 42%, rgba(16, 28, 40, 0.42) 0%, rgba(5, 9, 13, 0.92) 45%, rgba(0, 1, 2, 1) 78%),
         linear-gradient(180deg, #020406 0%, #060b0f 55%, #080d11 100%);
@@ -5318,9 +5438,7 @@
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.28),
         inset 0 1px 24px rgba(255, 255, 255, 0.10),
-        inset 0 0 52px rgba(0, 204, 255, 0.07),
-        0 14px 44px rgba(0, 0, 0, 0.42),
-        0 0 40px rgba(0, 204, 255, 0.10);
+        0 14px 44px rgba(0, 0, 0, 0.42);
       position: relative;
       z-index: 1;
       transform-style: preserve-3d;
@@ -5349,9 +5467,9 @@
       left: 18px;
       right: 18px;
       height: 1.5px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65) 30%, rgba(0, 204, 255, 0.55) 70%, transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65) 30%, rgba(255, 255, 255, 0.35) 70%, transparent);
       border-radius: 2px;
-      filter: drop-shadow(0 0 6px rgba(0, 204, 255, 0.45));
+      filter: none;
     }
 
     .login-card::after {
@@ -5360,7 +5478,7 @@
       inset: 0;
       border-radius: inherit;
       padding: 1px;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 30%, rgba(0, 204, 255, 0.25) 70%, rgba(255, 255, 255, 0.08) 100%);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 30%, rgba(255, 255, 255, 0.22) 70%, rgba(255, 255, 255, 0.08) 100%);
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -5941,21 +6059,26 @@
       overflow-x: hidden;
       overflow-y: auto;
     }
-
-    /* ============================================
-       介绍页（DeepSeek 风格，置于星空登录页下方）
-       ============================================ */
     .landing-intro {
       position: relative;
       z-index: 1;
       background:
-        radial-gradient(900px 520px at 85% 8%, rgba(var(--primary-rgb), 0.14), transparent 62%),
-        radial-gradient(760px 520px at 8% 30%, rgba(var(--primary-2-rgb), 0.10), transparent 60%),
-        linear-gradient(180deg, #05080b 0%, #0a1016 18%, #0e1520 48%, #0a1016 78%, #05080b 100%);
+        radial-gradient(900px 520px at 85% 8%, rgba(var(--primary-rgb), 0.10), transparent 62%),
+        radial-gradient(760px 520px at 8% 30%, rgba(var(--primary-2-rgb), 0.07), transparent 60%),
+        linear-gradient(180deg, rgba(5, 8, 11, 0.47) 0%, rgba(9, 14, 20, 0.33) 48%, rgba(5, 8, 11, 0.47) 100%);
       color: var(--text-primary);
       padding: 96px 24px 72px;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", "Segoe UI", sans-serif;
       overflow: hidden;
+    
+      transform: translateY(90px) scale(0.96);
+      opacity: 0;
+      transition: transform 0.9s cubic-bezier(0.22, 1.25, 0.25, 1), opacity 0.85s ease;
+      
+    }
+    .landing-intro.entered {
+      transform: none;
+      opacity: 1;
     }
 
     .landing-inner {
@@ -5965,7 +6088,31 @@
       z-index: 1;
     }
 
-    /* --- 入场动画（弹入 reveal） --- */
+    /* --- 浮动彩色光源（QQ 登录式光斑，缓慢浮动呼吸，不遮挡内容） --- */
+    .landing-orbs {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .landing-orbs i {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+      will-change: transform, opacity;
+    }
+    .orb-1 { width: 540px; height: 540px; left: -8%; top: 5%; background: radial-gradient(circle, rgba(124, 92, 255, 0.55), transparent 70%); animation: orbFloat1 21s ease-in-out infinite alternate; }
+    .orb-2 { width: 440px; height: 440px; right: -6%; top: 20%; background: radial-gradient(circle, rgba(0, 204, 255, 0.46), transparent 70%); animation: orbFloat2 26s ease-in-out infinite alternate; }
+    .orb-3 { width: 580px; height: 580px; left: 14%; bottom: -8%; background: radial-gradient(circle, rgba(255, 107, 157, 0.42), transparent 70%); animation: orbFloat3 23s ease-in-out infinite alternate; }
+    .orb-4 { width: 400px; height: 400px; right: 8%; bottom: 14%; background: radial-gradient(circle, rgba(193, 145, 255, 0.44), transparent 70%); animation: orbFloat4 19s ease-in-out infinite alternate; }
+    .orb-5 { width: 320px; height: 320px; left: 34%; top: 55%; background: radial-gradient(circle, rgba(90, 200, 250, 0.40), transparent 70%); animation: orbFloat5 28s ease-in-out infinite alternate-reverse; }
+    @keyframes orbFloat1 { 0% { transform: translate(0, 0) scale(1); opacity: 0.38; } 100% { transform: translate(62px, 36px) scale(1.14); opacity: 0.62; } }
+    @keyframes orbFloat2 { 0% { transform: translate(0, 0) scale(1); opacity: 0.40; } 100% { transform: translate(-50px, 54px) scale(1.08); opacity: 0.64; } }
+    @keyframes orbFloat3 { 0% { transform: translate(0, 0) scale(1); opacity: 0.34; } 100% { transform: translate(46px, -42px) scale(1.16); opacity: 0.58; } }
+    @keyframes orbFloat4 { 0% { transform: translate(0, 0) scale(1); opacity: 0.40; } 100% { transform: translate(-34px, -30px) scale(1.12); opacity: 0.66; } }
+    @keyframes orbFloat5 { 0% { transform: translate(0, 0) scale(1); opacity: 0.36; } 100% { transform: translate(40px, 28px) scale(1.18); opacity: 0.60; } }
+
     .landing-intro .reveal {
       opacity: 0;
       transform: translateY(36px) scale(0.955);
@@ -5974,7 +6121,8 @@
     }
     .landing-intro .reveal.revealed {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: none;
+      will-change: auto;
     }
 
     /* --- Hero --- */
@@ -5998,14 +6146,25 @@
       margin-bottom: 26px;
     }
     .landing-title {
-      font-size: clamp(34px, 5.4vw, 60px);
+      font-size: clamp(38px, 6vw, 64px);
       font-weight: 800;
-      letter-spacing: 0.02em;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
       margin: 0 0 20px;
-      background: linear-gradient(120deg, #f4f8fb 20%, rgba(var(--primary-rgb), 0.9) 70%, #8fd8ff 100%);
+      background: linear-gradient(90deg,
+        #ffb47a 0%, #ffd9a0 12%, #7fd4ff 34%, #00e0ff 50%, #e879f9 66%, #a78bfa 78%, #3d5afe 90%, #ffb47a 100%);
+      background-size: 400% 100%;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: titleAurora 120s linear infinite;
+    }
+    @keyframes titleAurora {
+      0%   { background-position: 0% 50%;   text-shadow: 0 0 22px rgba(255, 180, 122, 0.28), 0 0 60px rgba(255, 180, 122, 0.12); }
+      25%  { background-position: 100% 50%; text-shadow: 0 0 26px rgba(0, 224, 255, 0.38), 0 0 64px rgba(0, 224, 255, 0.16); }
+      50%  { background-position: 200% 50%; text-shadow: 0 0 26px rgba(232, 121, 249, 0.38), 0 0 64px rgba(232, 121, 249, 0.16); }
+      75%  { background-position: 300% 50%; text-shadow: 0 0 22px rgba(61, 90, 254, 0.32), 0 0 58px rgba(61, 90, 254, 0.13); }
+      100% { background-position: 400% 50%; text-shadow: 0 0 22px rgba(255, 180, 122, 0.28), 0 0 60px rgba(255, 180, 122, 0.12); }
     }
     .landing-sub {
       max-width: 640px;
@@ -6051,11 +6210,11 @@
       font-size: 15px;
       font-weight: 500;
       padding: 13px 30px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(8.8px);
+      -webkit-backdrop-filter: blur(8.8px);
       transition: all 0.3s ease;
     }
     .landing-link:hover {
@@ -6076,22 +6235,12 @@
       overflow: hidden;
       text-align: center;
       padding: 26px 14px 22px;
-      border-radius: 20px;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.03) 60%, rgba(var(--primary-rgb), 0.06) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 32px rgba(0, 0, 0, 0.30);
-    }
-    .stat-item::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 24%;
-      right: 24%;
-      height: 1.5px;
-      background: linear-gradient(90deg, transparent, rgba(var(--primary-rgb), 0.7), transparent);
-      filter: drop-shadow(0 0 6px rgba(var(--primary-rgb), 0.5));
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8.8px);
+      -webkit-backdrop-filter: blur(8.8px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
     }
     .stat-item b {
       display: block;
@@ -6110,7 +6259,6 @@
       letter-spacing: 0.06em;
       color: rgba(255, 255, 255, 0.66);
     }
-
     /* --- 功能卡片 --- */
     .landing-section-title {
       text-align: center;
@@ -6126,68 +6274,76 @@
       margin: 0 0 34px;
       letter-spacing: 0.02em;
     }
-    .landing-features {
+        .landing-features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 18px;
     }
     .feature-card {
       position: relative;
-      padding: 26px 24px 24px;
-      border-radius: 22px;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.035) 55%, rgba(var(--primary-rgb), 0.07) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.13);
-      backdrop-filter: blur(24px) saturate(190%);
-      -webkit-backdrop-filter: blur(24px) saturate(190%);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 14px 36px rgba(0, 0, 0, 0.32);
+      padding: 30px 26px 26px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8.8px);
+      -webkit-backdrop-filter: blur(8.8px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
       transition: transform 0.3s var(--bounce), box-shadow 0.35s ease, border-color 0.3s ease;
       overflow: hidden;
     }
-    .feature-card::after {
-      content: "";
-      position: absolute;
-      top: -40%;
-      left: -30%;
-      width: 80%;
-      height: 140%;
-      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.10), transparent);
-      transform: rotate(12deg) translateX(-140%);
-      transition: transform 0.7s ease;
-      pointer-events: none;
+    .landing-intro .feature-card.reveal.revealed:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 176, 92, 0.55);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
     }
-    .feature-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(var(--primary-rgb), 0.45);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26), 0 22px 48px rgba(var(--primary-rgb), 0.14), 0 14px 36px rgba(0, 0, 0, 0.34);
+    .feature-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
     }
-    .feature-card:hover::after {
-      transform: rotate(12deg) translateX(140%);
+    .feature-num {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      color: rgba(var(--primary-rgb), 0.9);
+      opacity: 0.8;
     }
     .feature-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
       font-weight: 700;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.24), rgba(var(--primary-2-rgb), 0.16));
-      border: 1px solid rgba(var(--primary-rgb), 0.4);
+      background: transparent;
       color: #fff;
-      box-shadow: 0 6px 18px rgba(var(--primary-rgb), 0.18);
+    }
+    .feature-icon svg {
+      display: block;
+      width: 33.6px;
+      height: 33.6px;
+    }
+    .feature-bar {
+      width: 46px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.9), rgba(var(--primary-2-rgb), 0.4));
+      margin: 0 0 14px;
+      filter: drop-shadow(0 0 6px rgba(var(--primary-rgb), 0.5));
     }
     .feature-title {
-      font-size: 17px;
-      font-weight: 700;
-      margin: 0 0 9px;
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 10px;
       letter-spacing: 0.02em;
     }
     .feature-desc {
-      font-size: 13.5px;
-      line-height: 1.75;
-      color: rgba(255, 255, 255, 0.62);
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.66);
       margin: 0;
     }
 
@@ -6196,14 +6352,7 @@
       margin-top: 64px;
       padding: 44px 30px 40px;
       text-align: center;
-      border-radius: 26px;
-      background:
-        radial-gradient(560px 220px at 50% -30%, rgba(var(--primary-rgb), 0.22), transparent 70%),
-        linear-gradient(160deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 60%, rgba(var(--primary-rgb), 0.10) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      backdrop-filter: blur(26px) saturate(180%);
-      -webkit-backdrop-filter: blur(26px) saturate(180%);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 20px 50px rgba(0, 0, 0, 0.35);
+      border-radius: 28px;
     }
     .landing-cta-block h3 {
       font-size: clamp(22px, 3vw, 30px);
@@ -6219,7 +6368,7 @@
       color: rgba(255, 255, 255, 0.6);
     }
 
-    /* --- "滑动查看更多" 提示（iOS 小横条跳动） --- */
+    
     .scroll-hint {
       position: absolute;
       bottom: calc(18% - 30px);
@@ -6257,6 +6406,119 @@
     @keyframes hintBounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(9px); }
+    }
+
+    /* ============================================
+       滚动进入介绍页：登录页元素渐隐上移（弹入衔接）
+       ============================================ */
+    body.landing-scrolled .splash-btn {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-18px);
+      pointer-events: none;
+    }
+    body.landing-scrolled .scroll-hint {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-22px);
+      pointer-events: none;
+    }
+
+    /* ============================================
+       关于我模块（Harness 风格双列卡）
+       ============================================ */
+    .landing-about {
+      margin-top: 64px;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 20px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .about-card {
+      position: relative;
+      padding: 30px 28px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8.8px);
+      -webkit-backdrop-filter: blur(8.8px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+      transition: box-shadow 0.4s ease, transform 0.3s var(--bounce);
+      overflow: hidden;
+    }
+    .about-avatar {
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      font-weight: 800;
+      color: #fff;
+      background:
+        radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.28), transparent 42%),
+        linear-gradient(135deg, #00ccff, #c191ff 60%, #ff6b9d);
+      box-shadow: 0 12px 34px rgba(var(--primary-rgb), 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+    .about-name {
+      text-align: center;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+    .about-role {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(var(--primary-rgb), 0.95);
+      letter-spacing: 0.08em;
+    }
+    .about-bio {
+      font-size: 14.5px;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.72);
+      margin: 0 0 20px;
+    }
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .about-tags span {
+      font-size: 12.5px;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.85);
+      padding: 7px 15px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.16), rgba(var(--primary-2-rgb), 0.10));
+      transition: border-color 0.3s ease, transform 0.3s var(--bounce);
+    }
+    .about-tags span:hover {
+      border-color: rgba(var(--primary-rgb), 0.55);
+      transform: translateY(-2px);
+    }
+    /* 关于我模块滚动定位后的高亮提示 */
+    .landing-about.about-flash .about-card {
+      animation: aboutFlash 1.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    @keyframes aboutFlash {
+      0%, 100% {
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 14px 36px rgba(0, 0, 0, 0.32);
+        border-color: rgba(255, 255, 255, 0.13);
+      }
+      28%, 72% {
+        box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.65), 0 24px 60px rgba(var(--primary-rgb), 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        border-color: rgba(var(--primary-rgb), 0.6);
+      }
+    }
+    @media (max-width: 820px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
     }
     @keyframes hintFadeIn {
       from { opacity: 0; }
@@ -6383,6 +6645,7 @@
   </style>
 
 <body data-mode="light" data-theme="cyan" data-font="medium" data-weight="normal">
+  <template id="authViews">
   <header class="topbar glass spotlight">
     <div class="brand">
       <div class="brand-logo">
@@ -6746,64 +7009,75 @@
       </div>
     </div>
   </div>
+  </template>
 
   <div class="view view-login" id="view-login">
+  
+    <div id="landingDock" class="landing-dock" role="navigation" aria-label="Zos dock">
+      <div class="dock-logo" data-i18n="dock_logo">Zos</div>
+      <div class="dock-right">
+        <button type="button" class="dock-pill" id="dockAboutBtn" data-i18n="dock_about">关于我</button>
+        <div class="dock-lang" id="dockLang" role="group" aria-label="language switch">
+          <button type="button" data-lang="zh" data-i18n="lang_zh">中</button>
+          <button type="button" data-lang="en" data-i18n="lang_en">EN</button>
+        </div>
+      </div>
+    </div>
+    <canvas id="particleCanvas"></canvas>
     <div id="loginPage" class="login-page">
-      <canvas id="particleCanvas"></canvas>
-      <div id="splashBtn" class="splash-btn" onclick="showLogin(event)"><span class="splash-text">让我们开始吧</span></div>
+      <div id="splashBtn" class="splash-btn" onclick="showLogin(event)"><span class="splash-text" data-i18n="splash">让我们开始吧</span></div>
       <div id="scrollHint" class="scroll-hint" aria-hidden="true">
         <span class="scroll-hint-line"></span>
-        <span class="scroll-hint-caption">滑动查看更多</span>
+        <span class="scroll-hint-caption" data-i18n="scroll_hint">滑动查看更多</span>
       </div>
       <div class="login-card hidden-card">
-        <!-- ZOS LOGO 已移除（登录页视觉改造：不再显示卡片上方 LOGO 大图，不破坏布局与提交逻辑） -->
         <div class="login-title">Zos</div>
         <div class="login-subtitle">Zos Studio</div>
 
         <div class="tab-switch">
           <span class="tab-indicator" aria-hidden="true"></span>
-          <button class="tab-btn active" onclick="switchTab('login')">登录</button>
-          <button class="tab-btn" onclick="switchTab('register')">注册</button>
+          <button class="tab-btn active" data-i18n="tab_login" onclick="switchTab('login')">登录</button>
+          <button class="tab-btn" data-i18n="tab_register" onclick="switchTab('register')">注册</button>
         </div>
 
         <!-- 登录表单 -->
         <div id="loginForm">
           <div class="input-group">
-            <label class="input-label">账号</label>
-            <input type="text" id="loginUser" class="input-field" placeholder="请输入您的账号" autocomplete="off">
+            <label class="input-label" data-i18n="label_user">账号</label>
+            <input type="text" id="loginUser" class="input-field" placeholder="请输入您的账号" data-i18n-placeholder="ph_user_login" autocomplete="off">
           </div>
           <div class="input-group">
-            <label class="input-label">密码</label>
-            <input type="password" id="loginPass" class="input-field" placeholder="请输入密码">
+            <label class="input-label" data-i18n="label_pass">密码</label>
+            <input type="password" id="loginPass" class="input-field" placeholder="请输入密码" data-i18n-placeholder="ph_pass_login">
           </div>
           <div class="input-group captcha-group">
-            <label class="input-label">验证码</label>
+            <label class="input-label" data-i18n="label_captcha">验证码</label>
             <div class="captcha-row">
-              <input type="text" id="loginCaptcha" class="input-field captcha-input" placeholder="6位数字" maxlength="6"
+              <input type="text" id="loginCaptcha" class="input-field captcha-input" placeholder="6位数字" data-i18n-placeholder="ph_captcha" maxlength="6"
                 autocomplete="off">
               <canvas id="captchaCanvas" class="captcha-canvas" width="132" height="48" title="点击刷新验证码"></canvas>
             </div>
           </div>
-          <button class="btn-primary btn-flow" onclick="handleLogin()">立即进入</button>
+          <button class="btn-primary btn-flow" data-i18n="btn_login_go" onclick="handleLogin()">立即进入</button>
           <div id="errorMsg" class="error-msg"></div>
         </div>
 
         <!-- 注册表单 -->
         <div id="registerForm" style="display:none">
           <div class="input-group">
-            <label class="input-label">账号</label>
-            <input type="text" id="regUser" class="input-field" placeholder="1-15位英文字母+6位数字" autocomplete="off">
-            <div class="input-hint">格式示例：name123456、NAME666888</div>
+            <label class="input-label" data-i18n="label_user">账号</label>
+            <input type="text" id="regUser" class="input-field" placeholder="1-15位英文字母+6位数字" data-i18n-placeholder="ph_user_reg" autocomplete="off">
+            <div class="input-hint" data-i18n="hint_format">格式示例：name123456、NAME666888</div>
           </div>
           <div class="input-group">
-            <label class="input-label">密码</label>
-            <input type="password" id="regPass" class="input-field" placeholder="至少6位">
+            <label class="input-label" data-i18n="label_pass">密码</label>
+            <input type="password" id="regPass" class="input-field" placeholder="至少6位" data-i18n-placeholder="ph_pass_reg">
           </div>
           <div class="input-group">
-            <label class="input-label">姓名 / 昵称</label>
-            <input type="text" id="regName" class="input-field" placeholder="请输入姓名 / 昵称">
+            <label class="input-label" data-i18n="label_name">姓名 / 昵称</label>
+            <input type="text" id="regName" class="input-field" placeholder="请输入姓名 / 昵称" data-i18n-placeholder="ph_name_reg">
           </div>
-          <button class="btn-primary btn-flow" onclick="handleRegister()">注 册 并 开 始</button>
+          <button class="btn-primary btn-flow" data-i18n="btn_register_go" onclick="handleRegister()">注 册 并 开 始</button>
           <div id="errorMsg2" class="error-msg"></div>
         </div>
 
@@ -6812,75 +7086,127 @@
 
     <!-- ========== 介绍页（置于星空登录页下方，向下滚动进入） ========== -->
     <section class="landing-intro" id="landingIntro" aria-label="Zos 平台介绍">
+      <div class="landing-orbs" aria-hidden="true">
+        <i class="orb-1"></i><i class="orb-2"></i><i class="orb-3"></i><i class="orb-4"></i><i class="orb-5"></i>
+      </div>
       <div class="landing-inner">
 
         <!-- 品牌标语 -->
         <div class="landing-hero reveal">
-          <p class="landing-kicker">ZOS · C 语言学习平台</p>
-          <h2 class="landing-title">环境，造就人格</h2>
-          <p class="landing-sub">体系化 C 语言精读课程 · 内置模拟编译器 · 实时资讯与多用户空间<br>你的每一次敲击，都会真实运行。</p>
+          <p class="landing-kicker" data-i18n="kicker">ZOS · C 语言学习平台</p>
+          <h2 class="landing-title" data-i18n="hero_title">环境，造就人格</h2>
+          <p class="landing-sub" data-i18n="hero_sub">体系化 C 语言精读课程 · 内置模拟编译器 · 实时资讯与多用户空间<br>你的每一次敲击，都会模拟真实运行。</p>
           <div class="landing-hero-actions">
-            <button class="landing-cta" type="button" onclick="landingStart()">开始学习</button>
-            <a class="landing-link" href="#/index" data-view="index">浏览主界面</a>
+            <button class="landing-cta" type="button" data-i18n="cta_start" onclick="landingStart()">开始学习</button>
+            <a class="landing-link" href="#/index" data-view="index" data-i18n="link_browse">浏览主界面</a>
           </div>
         </div>
 
         <!-- 统计数字亮点 -->
         <div class="landing-stats reveal">
-          <div class="stat-item"><b>12</b><span>章体系课程</span></div>
-          <div class="stat-item"><b>87</b><span>个知识点</span></div>
-          <div class="stat-item"><b>8</b><span>色主题切换</span></div>
-          <div class="stat-item"><b>6</b><span>类 IT 资讯</span></div>
+          <div class="stat-item"><b>12</b><span data-i18n="stat1">章体系课程</span></div>
+          <div class="stat-item"><b>87</b><span data-i18n="stat2">个知识点</span></div>
+          <div class="stat-item"><b>8</b><span data-i18n="stat3">色主题切换</span></div>
+          <div class="stat-item"><b>6</b><span data-i18n="stat4">类 IT 资讯</span></div>
         </div>
 
         <!-- 核心功能 -->
-        <h3 class="landing-section-title reveal">核心功能</h3>
-        <p class="landing-section-sub reveal">从语法到指针，从代码到资讯，一站式的 C 语言成长空间</p>
+        <h3 class="landing-section-title reveal" data-i18n="feat_title">核心功能</h3>
+        <p class="landing-section-sub reveal" data-i18n="feat_sub">从语法到指针，从代码到资讯，一站式的 C 语言成长空间</p>
         <div class="landing-features">
 
           <div class="feature-card reveal">
-            <div class="feature-icon">C</div>
-            <h4 class="feature-title">C 语言系统学习</h4>
-            <p class="feature-desc">12 章 87 个知识点体系化精读，涵盖基础语法、指针、结构体、动态内存与文件操作，附重点笔记与进度追踪。</p>
+            <div class="feature-top">
+              <span class="feature-num">01</span>
+              <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="33.6" height="33.6"><path fill="#0891b2" d="M6 21.5q-1.45 0-2.475-1.025T2.5 18t1.025-2.475T6 14.5t2.475 1.025T9.5 18q0 .55-.162 1.063t-.488.962v-.675q.75.325 1.55.488T12 20q3.075 0 5.313-2t2.612-4.975q.05-.425.35-.725T21 12t.713.3t.237.725q-.4 3.8-3.225 6.388T12 22q-1.125 0-2.2-.238t-2.075-.712q-.4.225-.837.338T6 21.5m6-6q-1.45 0-2.475-1.025T8.5 12t1.025-2.475T12 8.5t2.475 1.025T15.5 12t-1.025 2.475T12 15.5M12 4Q8.925 4 6.688 6t-2.613 4.975q-.05.425-.35.725T3 12t-.712-.3t-.238-.725q.4-3.8 3.225-6.387T12 2q1.125 0 2.2.238t2.075.712q.4-.225.838-.338T18 2.5q1.45 0 2.475 1.025T21.5 6t-1.025 2.475T18 9.5t-2.475-1.025T14.5 6q0-.55.163-1.062t.487-.963v.675q-.75-.325-1.55-.488T12 4"/></svg></div>
+            </div>
+            <div class="feature-bar"></div>
+            <h4 class="feature-title" data-i18n="f1_title">知识系统化教学</h4>
+            <p class="feature-desc" data-i18n="f1_desc">12 章 87 个知识点体系化精读，章节进度一目了然，由浅入深完成 C 语言全景精读。</p>
           </div>
 
           <div class="feature-card reveal">
-            <div class="feature-icon">&lt;/&gt;</div>
-            <h4 class="feature-title">内置模拟编译器</h4>
-            <p class="feature-desc">无需安装环境，页面内即可编写并真实执行 C 代码，支持 printf、分支循环、函数调用等常用语法，即时反馈运行结果。</p>
+            <div class="feature-top">
+              <span class="feature-num">02</span>
+              <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="33.6" height="33.6"><path fill="#ffffff" d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20zm0-2h16V8H4zm3.5-1l-1.4-1.4L8.675 13l-2.6-2.6L7.5 9l4 4zm4.5 0v-2h6v2z"/></svg></div>
+            </div>
+            <div class="feature-bar"></div>
+            <h4 class="feature-title" data-i18n="f2_title">内置模拟编译器</h4>
+            <p class="feature-desc" data-i18n="f2_desc">无需安装环境，页面内真实执行 C 代码：printf、分支循环、函数调用即刻反馈运行结果。</p>
           </div>
 
           <div class="feature-card reveal">
-            <div class="feature-icon">闻</div>
-            <h4 class="feature-title">IT 资讯中心</h4>
-            <p class="feature-desc">AI、Agent、大模型、云服务、手机电脑数码、智驾汽车六大分类实时更新，学习之余把握科技前沿。</p>
+            <div class="feature-top">
+              <span class="feature-num">03</span>
+              <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="33.6" height="33.6"><path fill="#7c3aed" d="M9.7 10.75q.425-.45 1.025-.725T12 9.75q1.35 0 2.3.95t.95 2.3t-.95 2.3t-2.3.95q-.9 0-1.637-.45T9.2 14.625q-.15-.275-.437-.363T8.2 14.3q-.3.125-.412.438t.062.587q.6 1.1 1.7 1.763t2.45.662q1.95 0 3.35-1.4t1.4-3.35t-1.4-3.35T12 8.25q-.95 0-1.775.35t-1.475.95v-.8q0-.325-.213-.537T8 8t-.537.213t-.213.537v2.75q0 .325.213.538T8 12.25h2.75q.325 0 .538-.213t.212-.537t-.213-.537t-.537-.213zM6 22q-.825 0-1.412-.587T4 20V4q0-.825.588-1.412T6 2h7.175q.4 0 .763.15t.637.425l4.85 4.85q.275.275.425.638t.15.762V20q0 .825-.587 1.413T18 22z"/></svg></div>
+            </div>
+            <div class="feature-bar"></div>
+            <h4 class="feature-title" data-i18n="f3_title">反馈复盘式学习</h4>
+            <p class="feature-desc" data-i18n="f3_desc">收藏、笔记、待问一体化沉淀，随时温故复盘，让每个疑问都有回响。</p>
           </div>
 
           <div class="feature-card reveal">
-            <div class="feature-icon">人</div>
-            <h4 class="feature-title">多用户 · 数据隔离</h4>
-            <p class="feature-desc">独立账号体系，每位用户的章节进度、笔记与收藏互不干扰，支持多人共用一个平台各自安心学习。</p>
+            <div class="feature-top">
+              <span class="feature-num">04</span>
+              <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="33.6" height="33.6"><g fill="none"><path d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z"/><path fill="#059669" d="M19 8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-3h6a2 2 0 0 0 2-2V8zm-5-5a2 2 0 0 1 2 2v3h-6a2 2 0 0 0-2 2v6H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 7v4h-4v-4z"/></g></svg></div>
+            </div>
+            <div class="feature-bar"></div>
+            <h4 class="feature-title" data-i18n="f4_title">资讯融合</h4>
+            <p class="feature-desc" data-i18n="f4_desc">AI / Agent / 大模型 / 云服务 / 数码 / 智驾六类实时资讯，学习之余把握科技前沿。</p>
           </div>
 
           <div class="feature-card reveal">
-            <div class="feature-icon">色</div>
-            <h4 class="feature-title">8 色主题 · 夜间模式</h4>
-            <p class="feature-desc">青蓝、紫罗兰、翡翠、落霞、樱粉、薄荷、琥珀、暗夜八种主题随心切换，配合夜间模式与液态玻璃质感，护眼又美观。</p>
+            <div class="feature-top">
+              <span class="feature-num">05</span>
+              <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="33.6" height="33.6"><path fill="#eab308" d="M6.175 1.4L7.6 0l8.575 8.575q.575.575.575 1.425t-.575 1.425l-4.75 4.75q-.575.575-1.425.575t-1.425-.575l-4.75-4.75Q3.25 10.85 3.25 10t.575-1.425L8.575 3.8zM10 5.225L5.225 10h9.55zm7.588 11.188Q17 15.825 17 15q0-.525.313-1.125T18 12.75q.225-.3.475-.625T19 11.5q.275.3.525.625t.475.625q.375.525.688 1.125T21 15q0 .825-.587 1.413T19 17t-1.412-.587M2 24v-4h20v4z"/></svg></div>
+            </div>
+            <div class="feature-bar"></div>
+            <h4 class="feature-title" data-i18n="f5_title">自定义主题</h4>
+            <p class="feature-desc" data-i18n="f5_desc">多色主题 + 夜间模式 + 可调字号字重，打造属于你的阅读体验。</p>
           </div>
 
           <div class="feature-card reveal">
-            <div class="feature-icon">藏</div>
-            <h4 class="feature-title">个人中心三合一</h4>
-            <p class="feature-desc">收藏、笔记、待问一体化管理：标记喜欢的知识点、沉淀学习笔记、记录待解答疑问，随时回看温故知新。</p>
+            <div class="feature-top">
+              <span class="feature-num">06</span>
+              <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="33.6" height="33.6"><path fill="#ffffff" d="m8.8 10.95l2.15-2.175l-1.4-1.425l-.4.4q-.275.275-.687.288T7.75 7.75t-.3-.712t.3-.713l.375-.375L7 4.825L4.825 7zm8.2 8.225L19.175 17l-1.125-1.125l-.4.375q-.3.3-.7.3t-.7-.3t-.3-.7t.3-.7l.375-.4l-1.425-1.4l-2.15 2.15zm-.775-12.75l1.4 1.4l1.4-1.4L17.6 5zM4 21q-.425 0-.712-.288T3 20v-2.825q0-.2.075-.387t.225-.338l4.075-4.075L3.05 8.05Q2.625 7.625 2.625 7t.425-1.05l2.9-2.9q.425-.425 1.05-.412t1.05.437L12.4 7.4l3.775-3.8q.3-.3.675-.45t.775-.15t.775.15t.675.45L20.4 4.95q.3.3.45.675T21 6.4t-.15.763t-.45.662l-3.775 3.8l4.325 4.325q.425.425.425 1.05t-.425 1.05l-2.9 2.9q-.425.425-1.05.425t-1.05-.425l-4.325-4.325L7.55 20.7q-.15.15-.337.225T6.825 21z"/></svg></div>
+            </div>
+            <div class="feature-bar"></div>
+            <h4 class="feature-title" data-i18n="f6_title">设计美学</h4>
+            <p class="feature-desc" data-i18n="f6_desc">深空粒子星空 · 高级背景材质，动态彩霞光影，沉浸式深色美学，让学习环境本身成为享受。</p>
           </div>
 
+        </div>
+
+        <!-- 关于我（开发者介绍） -->
+        <div class="landing-about reveal" id="aboutSection">
+          <h3 class="landing-section-title" data-i18n="about_title">关于我</h3>
+          <p class="landing-section-sub" data-i18n="about_sub">About · Zos 平台背后的那个人</p>
+          <div class="about-grid">
+            <div class="about-card about-avatar-card">
+              <div class="about-avatar">Zr</div>
+              <div class="about-name" data-i18n="about_name">周· Zos</div>
+              <div class="about-role" data-i18n="about_role">独立开发者 / 作者</div>
+            </div>
+            <div class="about-card about-detail-card">
+              <p class="about-bio" data-i18n="about_bio">集成电路专业大二在读学生 | 软硬兼行 | Java、C、HTML、CSS、Python | 数码、绘画、摄影、钢琴、书法、音乐与创作 | 个人开发能力有限，简陋之处在所难免，页面不断优化中，愿共同学习进步！</p>
+              <div class="about-tags">
+                <span data-i18n="tag_digital">电子数码</span>
+                <span data-i18n="tag_draw">绘画</span>
+                <span data-i18n="tag_photo">摄影</span>
+                <span data-i18n="tag_piano">钢琴</span>
+                <span data-i18n="tag_calligraphy">书法</span>
+                <span data-i18n="tag_music">音乐</span>
+                <span data-i18n="tag_diy">创作 DIY</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 结尾 CTA -->
         <div class="landing-cta-block reveal">
-          <h3>准备好开始了吗？</h3>
-          <p>从 Hello World 到指针与内存管理，一步步成为真正的 C 语言高手。</p>
-          <button class="landing-cta" type="button" onclick="landingStart()">立即开始学习</button>
+          <h3 data-i18n="cta_block_title">准备好开始了吗？</h3>
+          <p data-i18n="cta_block_sub">从 Hello World 到指针与内存管理，一步步成为真正的 C 语言高手。</p>
+          <button class="landing-cta" type="button" data-i18n="cta_block_btn" onclick="landingStart()">立即开启学习之旅</button>
         </div>
 
       </div>
@@ -6994,6 +7320,31 @@
 
   </script>
   <script>
+    /* ============================================================
+       Zos - 登录后视图挂载器
+       非登录视图 DOM 已整体放入 <template id="authViews">，
+       未登录（陌生访客）时初始 DOM 仅渲染登录页；
+       登录成功或已登录用户打开时，通过本挂载器按需克隆注入，
+       注入完成后依次执行 afterAuthMount 队列中的视图初始化逻辑。
+       ============================================================ */
+    window.ZOS = window.ZOS || {};
+    window.ZOS.authViewsMounted = false;
+    window.ZOS.afterAuthMount = window.ZOS.afterAuthMount || [];
+    window.ZOS.mountAuthViews = function () {
+      if (window.ZOS.authViewsMounted) return;
+      var tpl = document.getElementById('authViews');
+      if (!tpl) { window.ZOS.authViewsMounted = true; return; }
+      var frag = document.createDocumentFragment();
+      frag.appendChild(tpl.content.cloneNode(true));
+      tpl.parentNode.insertBefore(frag, tpl);
+      window.ZOS.authViewsMounted = true;
+      var q = window.ZOS.afterAuthMount || [];
+      window.ZOS.afterAuthMount = [];
+      for (var i = 0; i < q.length; i++) {
+        try { q[i](); } catch (e) { try { console.error(e); } catch (e2) {} }
+      }
+    };
+
     /* ============================================================
        Zos - API 封装与通用工具（纯前端本地数据层）
        ============================================================ */
@@ -8654,6 +9005,9 @@
     };
 
     /* 全局兜底：任何未捕获的 Promise 异常不阻断页面 */
+    // 合并并保持同一引用：把已注册的扩展能力（如登录后视图挂载器 mountAuthViews）并入 ZOS，
+    // 并让 window.ZOS 指向同一对象，保证词法 ZOS 与全局 window.ZOS 后续挂载（SPA 等）同步。
+    Object.assign(ZOS, window.ZOS);
     window.ZOS = ZOS;
 
     const Auth = {
@@ -8854,6 +9208,7 @@
         var t = 'index';
         try { t = sessionStorage.getItem('ck_redirect') || 'index'; sessionStorage.removeItem('ck_redirect'); } catch (e) { }
         if (GUARDED[t] && !Auth.isLoggedIn()) t = 'index';
+        if (!window.ZOS.authViewsMounted) window.ZOS.mountAuthViews();
         showView(t);
       }
 
@@ -8893,6 +9248,7 @@
           if (h && document.getElementById('view-' + h)) start = h;
         } catch (e) { }
         if (GUARDED[start] && !Auth.isLoggedIn()) start = 'login';
+        if (start !== 'login' && !window.ZOS.authViewsMounted) window.ZOS.mountAuthViews();
         showView(start);
       }
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
@@ -8914,6 +9270,7 @@
   <script>
     /* Zos 顶部导航菜单：移动端横条菜单面板开合 */
     (function () {
+      function bootTopMenu() {
       function currentPage() {
         const p = (location.pathname.split('/').pop() || 'index.html');
         return p;
@@ -8939,6 +9296,8 @@
           if (window.innerWidth > 1024) panel.classList.remove('open');
         });
       }
+      }
+      (window.ZOS.afterAuthMount = window.ZOS.afterAuthMount || []).push(bootTopMenu);
     })();
 
   </script>
@@ -9245,11 +9604,7 @@
         bindEntries();
       }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-      } else {
-        init();
-      }
+      (window.ZOS.afterAuthMount = window.ZOS.afterAuthMount || []).push(init);
     })();
 
   </script>
@@ -9259,6 +9614,7 @@
        ============================================================ */
     (function () {
       'use strict';
+      function bootMain() {
 
       // ---------------- 状态 ----------------
       const state = {
@@ -10345,10 +10701,10 @@
         applyProfile: applyProfile
       };
 
-      document.addEventListener('DOMContentLoaded', function () {
-        init();
-        maybeShowIntro();
-      });
+      init();
+      maybeShowIntro();
+      }
+      (window.ZOS.afterAuthMount = window.ZOS.afterAuthMount || []).push(bootMain);
     })();
 
   </script>
@@ -10467,7 +10823,7 @@
         if (m) { try { localStorage.setItem('ck_intro_chapter', m); } catch (e) { } }
       }
 
-      document.addEventListener('DOMContentLoaded', init);
+      (window.ZOS.afterAuthMount = window.ZOS.afterAuthMount || []).push(init);
     })();
 
   </script>
@@ -10664,7 +11020,7 @@
       function buildItem(n, idx) {
         const item = document.createElement('div');
         item.className = 'news-item liquid spotlight';
-        item.style.animationDelay = (idx * 0.03) + 's';
+        item.style.animationDelay = (Math.min(idx, 15) * 0.03) + 's';
         const catName = n.category || '资讯';
         let imgHtml = '<div class="ni-img ni-placeholder" data-cat="' + esc(catName) + '"><span class="ni-cat-text">' + esc(catName) + '</span></div>';
         if (n.imageUrl) {
@@ -10712,7 +11068,7 @@
         $('#detailModal').classList.add('open');
       }
 
-      document.addEventListener('DOMContentLoaded', init);
+      (window.ZOS.afterAuthMount = window.ZOS.afterAuthMount || []).push(init);
     })();
 
   </script>
@@ -10720,6 +11076,7 @@
     /* Zos 个人中心页逻辑 */
     (function () {
       'use strict';
+      function bootProfile() {
 
       if (typeof Auth === 'undefined') { ZOS.SPA.goLogin(); return; }
       if (!Auth.guard()) return;
@@ -11031,7 +11388,9 @@
         }
       };
 
-      document.addEventListener('DOMContentLoaded', init);
+      init();
+      }
+      (window.ZOS.afterAuthMount = window.ZOS.afterAuthMount || []).push(bootProfile);
     })();
 
   </script>
@@ -11127,9 +11486,9 @@
         }
 
         function computeParticleCount() {
-          // 原基数 720 → 600，等效粒子数 ×1.2；下限 1500→1800，上限 2800→3360
-          var n = Math.round((W * H) / 600);
-          return Math.max(1800, Math.min(3360, n));
+          // 基数 420 → 340，等效粒子数 ×1.76（配合 step=1 高密度采样）；下限 2600→3000，上限 4800→5600
+          var n = Math.round((W * H) / 340);
+          return Math.max(3000, Math.min(5600, n));
         }
 
         // ===== 星空（远/中/近三层，深度层次分明） =====
@@ -11168,7 +11527,7 @@
           off.width = tw;
           off.height = th;
           var offCtx = off.getContext('2d');
-          offCtx.font = 'bold ' + fontSize + 'px "PingFang SC","Microsoft YaHei","SimHei",sans-serif';
+          offCtx.font = 'bold ' + fontSize + 'px -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", "Segoe UI", sans-serif';
           offCtx.textAlign = 'center';
           offCtx.textBaseline = 'middle';
           offCtx.fillStyle = '#fff';
@@ -11176,16 +11535,17 @@
 
           var data = offCtx.getImageData(0, 0, tw, th).data;
           var pts = [];
-          var step = 2;
-          var jit = function () { return (Math.random() - 0.5) * 1.2; };
+          // 采样步长 2 → 1：文字区域采样点约 4 倍，笔画更实、间隙更少
+          var step = 1;
+          var jit = function () { return (Math.random() - 0.5) * 0.6; };
           for (var y = 0; y < th; y += step) {
             for (var x = 0; x < tw; x += step) {
               var a = data[(y * tw + x) * 4 + 3];
-              if (a >= 100) {
-                // 文字覆盖区域：均匀网格全保留 → 粒子平均均匀铺满整个文字区域（内部与边缘密度一致）
+              if (a >= 50) {
+                // 文字覆盖区域：覆盖率阈值 100 → 50，边缘低透明也整体保留 → 笔画更完整、减少缺口断点
                 pts.push({ x: x - tw / 2 + jit(), y: y - th / 2 + jit() });
-              } else if (a > 60 && Math.random() < (a - 60) / 100) {
-                // 边缘低透明：按透明度概率保留 → 自然柔和边界
+              } else if (a > 24 && Math.random() < (a - 24) / 90) {
+                // 极边缘低透明：更高概率保留 → 自然柔和边界且更连续
                 pts.push({ x: x - tw / 2 + jit(), y: y - th / 2 + jit() });
               }
             }
@@ -11240,11 +11600,11 @@
 
           var sr = Math.random();
           if (sr < 0.75) {
-            p.size = 0.45 + Math.random() * 0.3;   // 小粒子为主体
+            p.size = 0.6 + Math.random() * 0.35;   // 小粒子为主体（上调，笔画更实）
           } else if (sr < 0.96) {
-            p.size = 0.75 + Math.random() * 0.4;   // 中粒子
+            p.size = 0.95 + Math.random() * 0.55;  // 中粒子
           } else {
-            p.size = 1.15 + Math.random() * 0.5;   // 少量亮点
+            p.size = 1.5 + Math.random() * 0.6;    // 亮点（更大更亮）
           }
         }
 
@@ -11283,9 +11643,9 @@
             p.ty = cy + t.y * scaleY + offY;
             p.x = sx; p.y = sy;
             p.progress = 0;
-            p.delay = Math.random() * 400;
-            // 首轮汇聚速度：×0.8 使汇聚时长延长约 1 秒（均值 4.0s → 5.0s）
-            p.speed = (Math.random() * 0.004 + 0.002) * 0.80;
+            p.delay = Math.random() * 200;
+            // 首轮汇聚：delay 缩短至 200ms 内、速度均匀化，汇聚更整齐柔和非线性
+            p.speed = (Math.random() * 0.004 + 0.002) * 0.85;
             p.spiralAmp = (Math.random() - 0.5) * 140;
             p.spiralFreq = Math.random() * 6 + 2;
           }
@@ -11369,21 +11729,21 @@
             if (p.delay > 0) continue;
             var t = Math.min(p.progress, 1);
             var baseSize = p.size * (0.55 + t * 0.75);
-            var glowSize = baseSize * 4.8;   // 泛光半径减弱（原 6 → 4.8）
+            var glowSize = baseSize * 5.2;   // 泛光半径略增（4.8 → 5.2），亮点更饱满
             if (!isOnScreen(p.x, p.y, glowSize)) continue;
 
             var alpha = Math.min(0.62 + t * 0.58, 1);
             var sprite = glowSprites[p.spriteIdx];
 
-            // 柔和光晕：泛光强度减弱但仍保留辉光感（原 0.4 → 0.28）
-            ctx.globalAlpha = alpha * 0.28;
+            // 柔和光晕：泛光强度提升（0.28 → 0.36），文字辉光更清晰可见
+            ctx.globalAlpha = alpha * 0.36;
             ctx.drawImage(sprite, p.x - glowSize, p.y - glowSize, glowSize * 2, glowSize * 2);
 
-            // 核心亮点
-            ctx.globalAlpha = Math.min(alpha * 1.1, 1);
+            // 核心亮点：半径系数 0.85 → 1.0，核心更实更亮
+            ctx.globalAlpha = Math.min(alpha * 1.15, 1);
             ctx.fillStyle = p.coreColor;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, baseSize * 0.85, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, baseSize * 1.0, 0, Math.PI * 2);
             ctx.fill();
           }
           ctx.globalAlpha = 1;
@@ -11442,6 +11802,66 @@
           ctx.globalAlpha = 1;
         }
 
+        // ===== 流星系统（随机流星：位置/颜色/拖尾随机，2 分钟 3~5 次随机间隔调度） =====
+        var meteors = [];
+        var globalTime = 0;
+        var nextMeteorAt = 2600 + Math.random() * 6000;
+        var METEOR_COLORS = ['255,255,255', '120,220,255', '255,214,120', '200,160,255'];
+
+        function spawnMeteor() {
+          var dir = Math.random() < 0.5 ? 1 : -1;          // 右倾 / 左倾
+          var ang = Math.random() * 0.32 + 0.42;           // 与水平夹角 ~24°~42°，斜向下
+          meteors.push({
+            x: W * (0.12 + Math.random() * 0.76),
+            y: H * (0.03 + Math.random() * 0.30),          // 顶部 / 斜上方随机出生
+            vx: Math.cos(ang) * dir,
+            vy: Math.sin(ang),
+            len: 400 + Math.random() * 560,                // 拖尾长度 400~960px（不低于 400）
+            speed: 7 + Math.random() * 6,                  // px/frame
+            color: METEOR_COLORS[Math.floor(Math.random() * METEOR_COLORS.length)],
+            age: 0,
+            life: 150 + Math.random() * 90
+          });
+        }
+
+        function updateMeteors(dt) {
+          for (var i = meteors.length - 1; i >= 0; i--) {
+            var m = meteors[i];
+            m.x += m.vx * m.speed * (dt / 16);
+            m.y += m.vy * m.speed * (dt / 16);
+            m.age += dt;
+            if (m.age > m.life) meteors.splice(i, 1);
+          }
+        }
+
+        function drawMeteors() {
+          for (var i = 0; i < meteors.length; i++) {
+            var m = meteors[i];
+            var fade = Math.min(1, m.age / 60) * Math.min(1, (m.life - m.age) / 80);
+            if (fade <= 0) continue;
+            var tx = m.x - m.vx * m.len;
+            var ty = m.y - m.vy * m.len;
+            var g = ctx.createLinearGradient(tx, ty, m.x, m.y);
+            g.addColorStop(0, 'rgba(' + m.color + ',0)');
+            g.addColorStop(0.62, 'rgba(' + m.color + ',0.28)');
+            g.addColorStop(1, 'rgba(' + m.color + ',0.95)');
+            ctx.globalAlpha = fade;
+            ctx.strokeStyle = g;
+            ctx.lineCap = 'round';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(tx, ty);
+            ctx.lineTo(m.x, m.y);
+            ctx.stroke();
+            // 流星亮核
+            ctx.fillStyle = 'rgba(255,255,255,0.95)';
+            ctx.beginPath();
+            ctx.arc(m.x, m.y, 2.4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.globalAlpha = 1;
+        }
+
         // ===== 主循环 =====
         var lastTime = 0;
 
@@ -11450,6 +11870,14 @@
           var dt = timestamp - lastTime;
           lastTime = timestamp;
           if (dt > 120) dt = 16;
+
+          globalTime += dt;
+          if (globalTime >= nextMeteorAt) {
+            spawnMeteor();
+            // 2 分钟 3~5 次 → 随机间隔约 24~50 秒
+            nextMeteorAt = globalTime + 24000 + Math.random() * 26000;
+          }
+          updateMeteors(dt);
 
           ctx.clearRect(0, 0, W, H);
           updateStars();
@@ -11464,6 +11892,7 @@
           ctx.translate(-cx, -cy);
 
           drawStars();
+          drawMeteors();
 
           if (isPausing) {
             // 暂停期：粒子停在散开位置，背景星空呼吸
@@ -11853,6 +12282,197 @@
       } else {
         ensureInit();
       }
+    })();
+  </script>
+  <script>
+    /* ============================================================
+       登录视图 i18n（中英切换）+ Dock 交互 + 弹入滚动衔接
+       ============================================================ */
+    (function () {
+      var ZOS_I18N = {
+        zh: {
+          dock_logo: 'Zos',
+          dock_about: '关于我',
+          lang_zh: '中',
+          lang_en: 'EN',
+          splash: '让我们开始吧',
+          scroll_hint: '滑动查看更多',
+          tab_login: '登录',
+          tab_register: '注册',
+          label_user: '账号',
+          label_pass: '密码',
+          label_captcha: '验证码',
+          label_name: '姓名 / 昵称',
+          ph_user_login: '请输入您的账号',
+          ph_pass_login: '请输入密码',
+          ph_captcha: '6位数字',
+          ph_user_reg: '1-15位英文字母+6位数字',
+          ph_pass_reg: '至少6位',
+          ph_name_reg: '请输入姓名 / 昵称',
+          btn_login_go: '立即进入',
+          btn_register_go: '注 册 并 开 始',
+          hint_format: '格式示例：name123456、NAME666888',
+          kicker: 'ZOS · C 语言学习平台',
+          hero_title: '环境，造就人格',
+          hero_sub: '体系化 C 语言精读课程 · 内置模拟编译器 · 实时资讯与多用户空间<br>你的每一次敲击，都会模拟真实运行。',
+          cta_start: '开始学习',
+          link_browse: '浏览主界面',
+          stat1: '章体系课程',
+          stat2: '个知识点',
+          stat3: '色主题切换',
+          stat4: '类 IT 资讯',
+          feat_title: '核心功能',
+          feat_sub: '从语法到指针，从代码到资讯，一站式的 C 语言成长空间',
+          f1_title: '知识系统化教学',
+          f1_desc: '12 章 87 个知识点体系化精读，章节进度一目了然，由浅入深完成 C 语言全景精读。',
+          f2_title: '内置模拟编译器',
+          f2_desc: '无需安装环境，页面内真实执行 C 代码：printf、分支循环、函数调用即刻反馈运行结果。',
+          f3_title: '反馈复盘式学习',
+          f3_desc: '收藏、笔记、待问一体化沉淀，随时温故复盘，让每个疑问都将有回响。',
+          f4_title: '资讯融合',
+          f4_desc: 'AI / Agent / 大模型 / 云服务 / 数码 / 智驾六类实时资讯，学习之余把握科技前沿。',
+          f5_title: '自定义主题',
+          f5_desc: '多色主题 + 夜间模式 + 可调字号字重，打造属于你的阅读体验。',
+          f6_title: '设计美学',
+          f6_desc: '深空粒子星空 · 动态彩霞光影，沉浸式深色美学，让学习环境本身成为享受。',
+          about_title: '关于我',
+          about_sub: 'About · Zos 平台背后的人',
+          about_name: '周瑞 · Zos',
+          about_role: '独立开发者 / 作者',
+          about_bio: '集成电路专业大二在读学生 | 高原本土野生开发者，设计者，完美主义者...Loading | 由于个人开发能力有限，简陋之处在所难免，页面细节不断优化中，愿与诸共同学习进步！',
+          tag_digital: '电子数码',
+          tag_draw: '绘画',
+          tag_photo: '摄影',
+          tag_piano: '琴友',
+          tag_calligraphy: '书法',
+          tag_music: '音乐',
+          tag_diy: '创作 DIY',
+          cta_block_title: '准备好开始了吗？',
+          cta_block_sub: '从 Hello World 到指针与内存管理，一步步成为真正的 C 语言能手*。',
+          cta_block_btn: '立即开始'
+        },
+        en: {
+          dock_logo: 'Zos',
+          dock_about: 'About',
+          lang_zh: '中',
+          lang_en: 'EN',
+          splash: "Let's get started",
+          scroll_hint: 'Scroll for more',
+          tab_login: 'Log in',
+          tab_register: 'Sign up',
+          label_user: 'Account',
+          label_pass: 'Password',
+          label_captcha: 'Captcha',
+          label_name: 'Name / Nickname',
+          ph_user_login: 'Enter your account',
+          ph_pass_login: 'Enter your password',
+          ph_captcha: '6-digit code',
+          ph_user_reg: '1-15 English letters + 6 digits',
+          ph_pass_reg: 'At least 6 chars',
+          ph_name_reg: 'Enter name / nickname',
+          btn_login_go: 'Enter Now',
+          btn_register_go: 'Sign up & start',
+          hint_format: 'Format: name123456, NAME666888',
+          kicker: 'ZOS · C Language Learning Platform',
+          hero_title: 'Environment shapes character',
+          hero_sub: 'Systematic in-depth C language courses · built-in compiler simulator · live news & multi-user space<br>Every keystroke simulates real execution.',
+          cta_start: 'Start Learning',
+          link_browse: 'Browse the App',
+          stat1: 'Course Chapters',
+          stat2: 'Knowledge Points',
+          stat3: 'Color Themes',
+          stat4: 'IT News Categories',
+          feat_title: 'Core Features',
+          feat_sub: 'From syntax to pointers, from code to news — an all-in-one space to grow in C.',
+          f1_title: 'Systematic Knowledge Teaching',
+          f1_desc: 'Systematic deep reading across 12 chapters and 87 knowledge points, with clear progress tracking from basics to advanced C.',
+          f2_title: 'Built-in Compiler Simulator',
+          f2_desc: 'Run real C code right in the page without any setup: printf, branches, loops and function calls return instant results.',
+          f3_title: 'Review-Driven Learning',
+          f3_desc: 'Favorites, notes and open questions in one place, with periodic review so every doubt gets answered.',
+          f4_title: 'Integrated Tech News',
+          f4_desc: 'Live updates across AI, Agent, LLM, cloud, digital devices and smart driving to keep you ahead.',
+          f5_title: 'Custom Themes',
+          f5_desc: 'Multi-color themes, night mode and adjustable font size & weight, tailored to your own reading comfort.',
+          f6_title: 'Design Aesthetics',
+          f6_desc: 'Deep-space particles, iOS frosted glass and dynamic sunset glow — an immersive dark aesthetic that makes learning itself a pleasure.',
+          about_title: 'About',
+          about_sub: 'About · The person behind Zos',
+          about_name: 'Zhou Rui · Zos',
+          about_role: 'Independent Developer / Author',
+          about_bio: 'Sophomore majoring in Integrated Circuits | A native developer, designer, and perfectionist from the plateau... Loading | Due to my limited development skills, any roughness is inevitable. Page details are being continuously optimized. I hope to learn and grow together with you all!',
+          tag_digital: 'Digital Devices',
+          tag_draw: 'Drawing',
+          tag_photo: 'Photography',
+          tag_piano: 'Piano',
+          tag_calligraphy: 'Calligraphy',
+          tag_music: 'Music',
+          tag_diy: 'DIY Creation',
+          cta_block_title: 'Ready to begin?',
+          cta_block_sub: 'From Hello World to pointers and memory management — become a real C language master, step by step.',
+          cta_block_btn: 'Start Now'
+        }
+      };
+
+      function applyI18n(lang) {
+        var dict = ZOS_I18N[lang] || ZOS_I18N.zh;
+        var els = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < els.length; i++) {
+          var k = els[i].getAttribute('data-i18n');
+          if (dict[k] !== undefined) els[i].innerHTML = dict[k];
+        }
+        var phs = document.querySelectorAll('[data-i18n-placeholder]');
+        for (var j = 0; j < phs.length; j++) {
+          var pk = phs[j].getAttribute('data-i18n-placeholder');
+          if (dict[pk] !== undefined) phs[j].placeholder = dict[pk];
+        }
+        var langBtns = document.querySelectorAll('#dockLang button');
+        for (var m = 0; m < langBtns.length; m++) {
+          langBtns[m].classList.toggle('active', langBtns[m].getAttribute('data-lang') === lang);
+        }
+        document.body.setAttribute('data-lang', lang);
+      }
+      function setLang(lang) {
+        lang = lang === 'en' ? 'en' : 'zh';
+        try { localStorage.setItem('zos_lang', lang); } catch (e) { }
+        applyI18n(lang);
+      }
+      var langBtns = document.querySelectorAll('#dockLang button');
+      for (var i = 0; i < langBtns.length; i++) {
+        langBtns[i].addEventListener('click', function () {
+          setLang(this.getAttribute('data-lang'));
+        });
+      }
+      var aboutBtn = document.getElementById('dockAboutBtn');
+      if (aboutBtn) {
+        aboutBtn.addEventListener('click', function () {
+          var about = document.getElementById('aboutSection');
+          if (!about) return;
+          try { about.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { about.scrollIntoView(); }
+          about.classList.remove('about-flash');
+          void about.offsetWidth;
+          about.classList.add('about-flash');
+          about.addEventListener('animationend', function () {
+            about.classList.remove('about-flash');
+          }, { once: true });
+        });
+      }
+      function onIntroScroll() {
+        var body = document.body;
+        if (!body.classList.contains('landing-scroll')) return;
+        var y = window.scrollY || document.documentElement.scrollTop || 0;
+        var vh = window.innerHeight || document.documentElement.clientHeight || 1;
+        var entered = y > vh * 0.55;
+        var intro = document.getElementById('landingIntro');
+        if (intro) intro.classList.toggle('entered', entered);
+        document.body.classList.toggle('landing-scrolled', entered);
+      }
+      window.addEventListener('scroll', onIntroScroll, { passive: true });
+      window.addEventListener('resize', onIntroScroll);
+      onIntroScroll();
+      var saved = '';
+      try { saved = localStorage.getItem('zos_lang'); } catch (e) { }
+      applyI18n(saved === 'en' ? 'en' : 'zh');
     })();
   </script>
 </body>
